@@ -28,8 +28,8 @@ def log_message(log_file, date, request_time, request, response_time, response):
     with open(log_file, 'a') as log:
         if 'keepalive' in response:
             log.write(f"{date};{response_time};{response}\n")
-        elif '(РїСЂРѕРёРіРЅРѕСЂРёСЂРѕРІР°РЅРѕ)' in response:
-            log.write(f"{date};{request_time};{request};{response_time};(С‚Р°Р№РјР°СѓС‚)\n")
+        elif '(РїСЂРѕРёРіРЅРѕСЂРёСЂРѕРІР°РЅo)' in response:
+            log.write(f"{date};{request_time};{request};{response_time};(С‚Р°Р№РјaСѓС‚)\n")
         else:
             log.write(f"{date};{request_time};{request};{response_time};{response}\n")
 
