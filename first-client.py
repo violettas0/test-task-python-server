@@ -28,14 +28,12 @@ async def tcp_client():
 
 def log_message(date, request_time, request, response_time, response):
     with open('first-client_log.txt', 'a') as log_file:
-        response_time_str = response_time
-        response_str = response
         if 'keepalive' in response:
-            log_file.write(f"{date};{response_time_str};{response_str}\n")
-        elif '(проигнорировано)' in response:
-            log_file.write(f"{date};{request_time};{request};{response_time_str};(таймаут)\n")
+            log_file.write(f"{date};{response_time};{response}\n")
+        elif '(РїСЂРѕРёРіРЅРѕСЂРёСЂРѕРІР°РЅРѕ)' in response:
+            log_file.write(f"{date};{request_time};{request};{response_time};(С‚Р°Р№РјР°СѓС‚)\n")
         else:
-            log_file.write(f"{date};{request_time};{request};{response_time_str};{response_str}\n")
+            log_file.write(f"{date};{request_time};{request};{response_time};{response}\n")
 
 async def main():
     await asyncio.gather(tcp_client())
