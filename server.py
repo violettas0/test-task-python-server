@@ -5,6 +5,7 @@ import datetime
 num_answ = 0
 CLIENTS = []
 
+
 async def handle_client(reader, writer):
     client_id = len(CLIENTS) + 1
     CLIENTS.append(writer)
@@ -16,8 +17,8 @@ async def handle_client(reader, writer):
         message = data.decode().strip()
         if message.startswith("["):
             if random.random() < 0.1:
-                log_message(datetime.datetime.now(), message, '', '')
-                response = '(проигнорировано)'
+                log_message(datetime.datetime.now(), message, "", "")
+                response = '(РїСЂРѕРёРіРЅРѕСЂРёСЂРѕРІР°РЅРѕ)'
                 writer.write(response.encode() + b'\n')
                 await writer.drain()
             else:
@@ -28,8 +29,10 @@ async def handle_client(reader, writer):
                 writer.write(response.encode() + b'\n')
                 num_answ += 1
                 await writer.drain()
-                log_message(datetime.datetime.now(), message, datetime.datetime.now() + datetime.timedelta(seconds=delay), response)
+                log_message(datetime.datetime.now(), message,
+                            datetime.datetime.now() + datetime.timedelta(seconds=delay), response)
     writer.close()
+
 
 async def send_keepalive():
     global num_answ
@@ -42,11 +45,13 @@ async def send_keepalive():
                 await writer.drain()
                 num_answ += 1
 
+
 def log_message(received_time, request, response_time, response):
     with open('server_log.txt', 'a') as log_file:
         response_time_str = response_time.strftime("%H:%M:%S.%f") if response_time else ""
-        response_str = response if response else "(проигнорировано)"
+        response_str = response if response else "(РїСЂРѕРёРіРЅРѕСЂРёСЂoРІР°РЅРѕ)"
         log_file.write(f"{received_time.date()};{received_time.time()};{request};{response_time_str};{response_str}\n")
+
 
 async def main():
     server = await asyncio.start_server(
