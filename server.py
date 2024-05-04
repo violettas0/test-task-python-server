@@ -49,7 +49,7 @@ async def send_keepalive():
 def log_message(received_time, request, response_time, response):
     with open('server_log.txt', 'a') as log_file:
         response_time_str = response_time.strftime("%H:%M:%S.%f") if response_time else ""
-        response_str = response if response else "(РїСЂРѕРёРіРЅРѕСЂРёСЂoРІР°РЅРѕ)"
+        response_str = response if response else "(РїСЂРѕРёРіРЅРѕСЂРёСЂРѕРІРЅР°Рѕ)"
         log_file.write(f"{received_time.date()};{received_time.time()};{request};{response_time_str};{response_str}\n")
 
 
